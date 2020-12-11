@@ -95,8 +95,8 @@ vowelOrConsonants(introduce.split(" ").join(""));
 let userName = prompt("Hello, whats your name?");
 let playerInfo = {
   name: userName,
-  lives: 3,
-  failNumbers: 0
+  lives: 5,
+  failNumbers: []
 }
 
 // generate random number between 10 and 50
@@ -104,8 +104,8 @@ let randomGenerator = Math.floor(Math.random() * 41) + 10
 //console.log(randomGenerator);
 
 // loop to keep the fun games going
-for (var i = 0; i < 3; i++ ) {
-  let userInput = prompt('Guess a number betwen 10 and 50.');
+while (playerInfo["lives"]>0) {
+   userInput = prompt('Guess a number betwen 10 and 50.');
   if (+userInput === randomGenerator) {
     alert (`Woo! ${playerInfo[`name`]} won the game!`);
     break;
@@ -113,19 +113,26 @@ for (var i = 0; i < 3; i++ ) {
   else if (+userInput !== randomGenerator) {
     userInput;
     playerInfo['lives']--;
-    playerInfo[`failNumbers`]++;
     //console.log(playerInfo['lives']);
     //console.log(playerInfo[`failNumbers`]);
+    
   }
-   
-  if (playerInfo['failNumbers'] == 1) {
-  alert (`Incorrect guess.  You have 2 lives left.`);
+   playerInfo[`failNumbers`].push(userInput);
+  
+  if (playerInfo['lives'] >= 2 && (userInput)>(randomGenerator)) {
+  alert (`Incorrect guess.  Guess lower.  You have ${playerInfo["lives"]} lives left.`);
   }
-  else if (playerInfo['failNumbers'] == 2) {
-  alert (`Wrong again.  You only have 1 life left.`);
+  if (playerInfo['lives'] >= 2 && (userInput)<(randomGenerator)) {
+  alert (`Incorrect guess.  Guess higher.  You have ${playerInfo["lives"]} lives left.`);
   }
-  else if (playerInfo['failNumbers'] == 3) 
-  alert (`I'm sorry.  You have no lives left.  You lose.`);   
+  else if (playerInfo['lives'] == 1 && (userInput)>(randomGenerator)) {
+  alert (`Wrong again.  Guess lower.  You only have 1 life left.`);
+  }
+    else if (playerInfo['lives'] == 1 && (userInput)<(randomGenerator)) {
+  alert (`Wrong again.  Guess higher.  You only have 1 life left.`);
+  }
+  else if (playerInfo['lives'] == 0) 
+  alert (`I'm sorry, ${playerInfo[`name`]}.  You have no lives left.  You lose.  You guessed ${playerInfo[`failNumbers`]}.  The correct number was ${(randomGenerator)}`);   
   }
 
 /*guessTheNumber  = () => {
@@ -143,7 +150,19 @@ htmlTarget3.innerHTML = answer3
 //------------------------ Question 4 ---------------------------
 // In the function below we are giving you an array of objects, each one with the same properties. Ask to the user for 3 diferentes options to sorting the array from the highest to lowest. In the case of a string, the criteria to sort must be the length of the string. The first one is sorting the array of objects based on the title property.
 // The second one sorting the array of objects based on the author property, the third one based on the library property. finally, the return value has to be the string sorted of the property selected separeted with a semicolon. Remember you have to sort all of the array based on the selected property
-//example: if the user select sorting by title the return value must be: "Mockingjay: The Final Book of The Hunger Games; Walter Isaacson; The Road Ahead"
+//example: if the user select sorting by title the return value must be: "Mockingjay: The Final Book of The Hunger Games; Walter Isaacson; The Road Ahead"reverse method
+
+/* loop backwards start at a number and run it backwards
+
+loop through library array
+get each book 
+user input ==== title
+length of string or highest to lowest
+if title.length 
+get length of string
+compare
+max title1 to title2 
+reverse */
 
 sort = () => {
 
